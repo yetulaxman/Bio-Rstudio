@@ -1,11 +1,15 @@
-#### Rstudio Dockerfile
+#### Modify the base image to be latest
+#### add r packages to be installed in intall.R
 
-``` FROM bioconductor/release_protmetcore2:latest ```
+### build docker image from dockerfile
+```  docker build -t rstudio_bio .  ```
 
+### check docker image named rstudio_bio
+``` docker images```
 
-``` ADD install.R /tmp/ ```
-
-# invalidates cache every 24 hours
-``` ADD http://master.bioconductor.org/todays-date /tmp/ ```
-
-```  RUN R -f /tmp/install.R ´´´
+### save the image 
+``` docker save rstudio_biouse >  /path/Rstudio_latest/rstudio_biouse_img ```
+### zip the image folder with docker file and install.R
+```  tar -zcvf rstudio_biouse_image.tar.gz Rstudio_latest/ ```
+#### store in object storage
+```s3cmd put rstudio_biouse_image.tar.gz  s3://proteomics```
