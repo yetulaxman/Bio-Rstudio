@@ -15,3 +15,16 @@
 ```s3cmd put rstudio_biouse_image.tar.gz  s3://proteomics```
 #### Retrieve image file from object storage
 ```https://object.pouta.csc.fi/proteomics/rstudio_biouse_image.tar.gz ```
+
+#### instructions for user configuations for multiple user authuntification
+- Avoid changing username when lauching rstudio; one can jiust change password to 
+- modification to userconf.sh
+```
+
+if grep --quiet "auth-none=1" /etc/rstudio/rserver.conf
+then
+        echo "Skipping authentication as requested"
+#elif [ "$PASSWORD" == "rstudio" ]
+fi
+
+```
